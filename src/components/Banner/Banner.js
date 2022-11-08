@@ -3,17 +3,20 @@ import React from 'react';
 
 const Banner = () => {
     return (
-        <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+        <div className="h-96 lg:h-96 sm:h-64">
             <Carousel>
-                <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-                    Slide 1
-                </div>
-                <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-                    Slide 2
-                </div>
-                <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-                    Slide 3
-                </div>
+                <img
+                    src="https://i.ibb.co/ZNxCScD/New-Project-2.jpg"
+                    alt="banner2"
+                />
+                <img
+                    src="https://i.ibb.co/jvGbtZY/travel-agency-facebook-cover-web-banner-design-template-268949-142.jpg"
+                    alt="banner3"
+                />
+                <img
+                    src="https://i.ibb.co/0DYvJcZ/travel-agency-template-banner-23-2148636211.jpg"
+                    alt="banner4"
+                />
             </Carousel>
         </div>
     );
