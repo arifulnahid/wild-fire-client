@@ -4,6 +4,13 @@ import { BsGoogle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+
+    const handleFormSubmit = event => {
+        event.preventDefault()
+        const form = event.target
+        console.log(form);
+    }
+
     return (
         <div className='grid lg:grid-cols-2 gap-2 lg:mx-14 '>
             <div>
@@ -11,7 +18,7 @@ const Login = () => {
             </div>
             <div className='w-full lg:my-auto'>
                 <h1 className='text-3xl font-bold'>Please Login Here</h1>
-                <form className="flex flex-col gap-4 p-3 text-start">
+                <form onSubmit={handleFormSubmit} className="flex flex-col gap-4 p-3 text-start">
                     <div>
                         <div className="mb-2 block">
                             <Label
