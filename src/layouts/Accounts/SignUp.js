@@ -1,9 +1,54 @@
 import { Button, Label, TextInput } from 'flowbite-react';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { BsGoogle } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContex } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
+    const [user, setUser] = useState({})
+    const { createNewUser, googleSignIn } = useContext(AuthContex);
+    const navigate = useNavigate();
+    // console.log("state:", user);
+
+    const handelGoogleSignIn = () => {
+        googleSignIn()
+            .then((result) => {
+                const user = result.user;
+                navigate("/")
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
+    }
+
+    const handleInput = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.id;
+        const value = form.value;
+
+        const userInput = { ...user };
+        userInput[name] = value;
+        setUser(userInput);
+
+    }
+
+    const handleFormSubmit = event => {
+        event.preventDefault();
+        if (user) {
+            const userName = user?.name;
+            const email = user?.email;
+            const password = user?.password;
+            createNewUser(email, password, userName)
+                .then(result => {
+                    // console.log(result.user);
+                    navigate("/")
+                }).catch(e => console.log(e))
+        }
+        // console.log(form);
+    }
+
     return (
         <div className='grid lg:grid-cols-2 gap-2 lg:mx-14 '>
             <div>
@@ -11,7 +56,7 @@ const SignUp = () => {
             </div>
             <div className='w-full lg:my-auto'>
                 <h1 className='text-3xl font-bold'>Please Login Here</h1>
-                <form className="flex flex-col gap-4 p-3 text-start">
+                <form onSubmit={handleFormSubmit} className="flex flex-col gap-4 p-3 text-start">
                     <div>
                         <div className="mb-2 block">
                             <Label
@@ -20,6 +65,7 @@ const SignUp = () => {
                             />
                         </div>
                         <TextInput
+                            onBlur={handleInput}
                             id="name"
                             type="text"
                             placeholder="Mr, Jhon"
@@ -29,12 +75,13 @@ const SignUp = () => {
                     <div>
                         <div className="mb-2 block">
                             <Label
-                                htmlFor="email1"
+                                htmlFor="email"
                                 value="Your email"
                             />
                         </div>
                         <TextInput
-                            id="email1"
+                            onBlur={handleInput}
+                            id="email"
                             type="email"
                             placeholder="name@flowbite.com"
                             required={true}
@@ -43,12 +90,13 @@ const SignUp = () => {
                     <div>
                         <div className="mb-2 block">
                             <Label
-                                htmlFor="password1"
+                                htmlFor="password"
                                 value="Your password"
                             />
                         </div>
                         <TextInput
-                            id="password1"
+                            onBlur={handleInput}
+                            id="password"
                             type="password"
                             required={true}
                         />
@@ -65,6 +113,7 @@ const SignUp = () => {
                         color="gray"
                         pill={true}
                         className="w-full"
+                        onClick={handelGoogleSignIn}
                     >
                         <BsGoogle /> <span className='mx-2 font-bold'>Signup With Google</span>
                     </Button>

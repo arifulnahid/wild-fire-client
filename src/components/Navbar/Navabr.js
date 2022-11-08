@@ -1,8 +1,12 @@
-import { Avatar, DarkThemeToggle, Dropdown, Flowbite, Navbar } from 'flowbite-react';
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Avatar, DarkThemeToggle, Dropdown, Navbar } from 'flowbite-react';
+import React, { useContext } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { AuthContex } from '../../contexts/AuthProvider';
 
 const Navabr = () => {
+    const { user, UserLogout } = useContext(AuthContex);
+    // console.log(user);
+
     return (
         <Navbar
             fluid={true}
@@ -25,26 +29,38 @@ const Navabr = () => {
                     inline={true}
                     label={<Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded={true} />}
                 >
-                    <Dropdown.Header>
-                        <span className="block text-sm">
-                            Bonnie Green
-                        </span>
-                        <span className="block truncate text-sm font-medium">
-                            name@flowbite.com
-                        </span>
-                    </Dropdown.Header>
+                    {
+                        user ?
+                            <Dropdown.Header>
+                                <span className="block text-sm">
+                                    {user?.name || "No Name"}
+                                </span>
+                                <span className="block truncate text-sm font-medium">
+                                    {user?.email}
+                                </span>
+                            </Dropdown.Header> :
+                            undefined
+                    }
                     <Dropdown.Item>
-                        Dashboard
+                        <Link to="/">Home</Link>
                     </Dropdown.Item>
                     <Dropdown.Item>
-                        Settings
+                        <Link to="/profile">Profile</Link>
                     </Dropdown.Item>
                     <Dropdown.Item>
-                        Earnings
+                        <Link to="/add-service">Add Service</Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <Link to="/rating">Ratings</Link>
                     </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item>
-                        Sign out
+                        {
+                            user ?
+                                <button onClick={UserLogout}> Sign out</button>
+                                : <Link to="/login">Login</Link>
+                        }
+
                     </Dropdown.Item>
                 </Dropdown>
                 <Navbar.Toggle />
@@ -77,15 +93,20 @@ const Navabr = () => {
                 >
                     Blog
                 </NavLink>
-                <NavLink
-                    className="block py-2 pr-4 pl-3 md:p-0 bg-blue-700 text-white dark:text-white md:bg-transparent md:text-blue-700"
-                    to='/login'
-                    style={({ isActive }) =>
-                        isActive ? { color: "red" } : undefined
-                    }
-                >
-                    Login
-                </NavLink>
+                {
+                    user ?
+                        <button onClick={UserLogout}>Logout</button>
+                        :
+                        <NavLink
+                            className="block py-2 pr-4 pl-3 md:p-0 bg-blue-700 text-white dark:text-white md:bg-transparent md:text-blue-700"
+                            to='/login'
+                            style={({ isActive }) =>
+                                isActive ? { color: "red" } : undefined
+                            }
+                        >
+                            Login
+                        </NavLink>
+                }
 
             </Navbar.Collapse>
         </Navbar>

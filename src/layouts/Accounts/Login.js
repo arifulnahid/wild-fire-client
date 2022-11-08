@@ -1,14 +1,36 @@
 import { Button, Label, TextInput } from 'flowbite-react';
-import React from 'react';
+import React, { useContext } from 'react';
 import { BsGoogle } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContex } from '../../contexts/AuthProvider';
 
 const Login = () => {
+    const { LoginUser, googleSignIn } = useContext(AuthContex);
+    const navigate = useNavigate();
+
+    const handelGoogleSignIn = () => {
+        googleSignIn()
+            .then((result) => {
+                const user = result.user;
+                navigate("/")
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
+    }
 
     const handleFormSubmit = event => {
         event.preventDefault()
         const form = event.target
-        console.log(form);
+        const email = form.email.value;
+        const password = form.password.value;
+        LoginUser(email, password)
+            .then(result => {
+                const user = result.user;
+                navigate("/")
+                console.log(user.email);
+            }).catch(e => console.error(e))
     }
 
     return (
@@ -22,12 +44,13 @@ const Login = () => {
                     <div>
                         <div className="mb-2 block">
                             <Label
-                                htmlFor="email1"
+                                htmlFor="email"
                                 value="Your email"
                             />
                         </div>
                         <TextInput
-                            id="email1"
+                            id="email"
+                            name="email"
                             type="email"
                             placeholder="name@flowbite.com"
                             required={true}
@@ -36,12 +59,13 @@ const Login = () => {
                     <div>
                         <div className="mb-2 block">
                             <Label
-                                htmlFor="password1"
+                                htmlFor="password"
                                 value="Your password"
                             />
                         </div>
                         <TextInput
-                            id="password1"
+                            id="password"
+                            name="password"
                             type="password"
                             required={true}
                         />
@@ -59,10 +83,10 @@ const Login = () => {
                         color="gray"
                         pill={true}
                         className="w-full"
+                        onClick={handelGoogleSignIn}
                     >
                         <BsGoogle /> <span className='mx-2 font-bold'>Login With Google</span>
                     </Button>
-
                 </div>
             </div>
         </div>
