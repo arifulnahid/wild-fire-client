@@ -19,9 +19,7 @@ const Navabr = () => {
                 </span>
             </Navbar.Brand>
             <div className="flex md:order-2">
-                <Flowbite>
-                    <DarkThemeToggle />
-                </Flowbite>
+                <DarkThemeToggle />
                 <Dropdown
                     arrowIcon={false}
                     inline={true}
