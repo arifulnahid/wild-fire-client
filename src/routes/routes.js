@@ -7,7 +7,9 @@ import Home from "../layouts/Home/Home";
 import Main from "../layouts/Main/Main";
 import EditProfile from "../layouts/Profile/EditProfile";
 import Profile from "../layouts/Profile/Profile";
+import AddService from "../layouts/Service/AddService";
 import Service from "../layouts/Service/Service";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -32,11 +34,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/profile',
-                element: <Profile></Profile>,
+                element: <PrivateRoute><Profile></Profile></PrivateRoute>,
                 children: [
                     {
                         path: "edit-profile",
-                        element: <EditProfile></EditProfile>
+                        element: <PrivateRoute><EditProfile></EditProfile></PrivateRoute>
                     }
                 ]
             },
@@ -47,6 +49,10 @@ export const router = createBrowserRouter([
             {
                 path: '/service',
                 element: <Service></Service>
+            },
+            {
+                path: "/add-service",
+                element: <PrivateRoute><AddService></AddService></PrivateRoute>
             }
         ]
     }

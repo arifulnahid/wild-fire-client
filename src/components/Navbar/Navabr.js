@@ -26,6 +26,7 @@ const Navabr = () => {
             <div className="flex md:order-2">
                 <DarkThemeToggle />
                 <Dropdown
+                    className='w-full'
                     arrowIcon={false}
                     inline={true}
                     label={
@@ -56,7 +57,7 @@ const Navabr = () => {
                         <Link to="/add-service">Add Service</Link>
                     </Dropdown.Item>
                     <Dropdown.Item>
-                        <Link to="/rating">Ratings</Link>
+                        <Link to="/rating">Reviews</Link>
                     </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item>
