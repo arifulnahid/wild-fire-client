@@ -5,6 +5,8 @@ import SignUp from "../layouts/Accounts/SignUp";
 import Blog from "../layouts/Blog/Blog";
 import Home from "../layouts/Home/Home";
 import Main from "../layouts/Main/Main";
+import EditProfile from "../layouts/Profile/EditProfile";
+import Profile from "../layouts/Profile/Profile";
 import Service from "../layouts/Service/Service";
 
 export const router = createBrowserRouter([
@@ -27,6 +29,16 @@ export const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
+            },
+            {
+                path: '/profile',
+                element: <Profile></Profile>,
+                children: [
+                    {
+                        path: "edit-profile",
+                        element: <EditProfile></EditProfile>
+                    }
+                ]
             },
             {
                 path: '/blog',

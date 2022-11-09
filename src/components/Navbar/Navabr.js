@@ -2,6 +2,7 @@ import { Avatar, DarkThemeToggle, Dropdown, Navbar } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContex } from '../../contexts/AuthProvider';
+import { BsPersonCircle } from 'react-icons/bs';
 
 const Navabr = () => {
     const { user, UserLogout } = useContext(AuthContex);
@@ -12,10 +13,10 @@ const Navabr = () => {
             fluid={true}
             rounded={false}
         >
-            <Navbar.Brand href="https://flowbite.com/">
+            <Navbar.Brand href="/">
                 <img
-                    src="https://flowbite.com/docs/images/logo.svg"
-                    className="mr-3 h-6 sm:h-9"
+                    src="https://i.ibb.co/MP93L4x/depositphotos-69492315-stock-illustration-abstract.png"
+                    className="w-14 mr-3"
                     alt="WildFire Logo"
                 />
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
@@ -27,13 +28,17 @@ const Navabr = () => {
                 <Dropdown
                     arrowIcon={false}
                     inline={true}
-                    label={<Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded={true} />}
+                    label={
+                        user?.photoURL ?
+                            <Avatar alt="user" img={user.photoURL} rounded={true} /> :
+                            <BsPersonCircle className='text-3xl' />
+                    }
                 >
                     {
                         user ?
                             <Dropdown.Header>
                                 <span className="block text-sm">
-                                    {user?.name || "No Name"}
+                                    {user?.displayName || "No Name"}
                                 </span>
                                 <span className="block truncate text-sm font-medium">
                                     {user?.email}

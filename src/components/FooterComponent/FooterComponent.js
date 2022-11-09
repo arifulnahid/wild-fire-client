@@ -10,7 +10,7 @@ const FooterComponent = () => {
                     <div>
                         <Footer.Brand
                             href="https://flowbite.com"
-                            src="https://flowbite.com/docs/images/logo.svg"
+                            src="https://st2.depositphotos.com/1030473/6949/v/450/depositphotos_69492315-stock-illustration-abstract-round-tree-logo.jpg"
                             alt="WildFire Logo"
                             name="WildFire"
                         />

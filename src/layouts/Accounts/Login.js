@@ -77,7 +77,7 @@ const Login = () => {
                 <div>
                     <div className='my-3'>
                         <div className='font-bold'>Create a new account <Link className='text-blue-700' to='/signup'>SignUp</Link></div>
-                        <div className='font-bold'>Forget Password Rest</div>
+                        <div className='font-bold'>Forget Password Reset</div>
                     </div>
                     <Button
                         color="gray"

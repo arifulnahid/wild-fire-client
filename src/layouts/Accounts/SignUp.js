@@ -6,7 +6,7 @@ import { AuthContex } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
     const [user, setUser] = useState({})
-    const { createNewUser, googleSignIn } = useContext(AuthContex);
+    const { createNewUser, googleSignIn, UpdateUserProfile } = useContext(AuthContex);
     const navigate = useNavigate();
     // console.log("state:", user);
 
@@ -37,11 +37,16 @@ const SignUp = () => {
     const handleFormSubmit = event => {
         event.preventDefault();
         if (user) {
-            const userName = user?.name;
+            const userName = user?.name || "";
             const email = user?.email;
             const password = user?.password;
+            const photo = user?.photo || "";
+
             createNewUser(email, password, userName)
                 .then(result => {
+                    UpdateUserProfile(userName, photo)
+                        .then(result => { })
+                        .catch(e => console.error(e))
                     // console.log(result.user);
                     navigate("/")
                 }).catch(e => console.log(e))
@@ -69,6 +74,21 @@ const SignUp = () => {
                             id="name"
                             type="text"
                             placeholder="Mr, Jhon"
+                            required={false}
+                        />
+                    </div>
+                    <div>
+                        <div className="mb-2 block">
+                            <Label
+                                htmlFor="photo"
+                                value="Your Photo"
+                            />
+                        </div>
+                        <TextInput
+                            onBlur={handleInput}
+                            id="photo"
+                            type="url"
+                            placeholder="Photo url"
                             required={false}
                         />
                     </div>
