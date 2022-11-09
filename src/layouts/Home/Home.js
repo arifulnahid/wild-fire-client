@@ -6,6 +6,7 @@ import Testimonial from '../../components/Testimonial/Testimonial';
 import ServiceItem from '../Service/ServiceItem';
 const Home = () => {
     const service = useLoaderData()
+    document.title = "Wildfire- Home"
     // console.log(service);
 
     return (

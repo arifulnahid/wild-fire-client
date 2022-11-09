@@ -5,6 +5,7 @@ import { AuthContex } from '../../contexts/AuthProvider';
 
 const Profile = () => {
     const { user } = useContext(AuthContex);
+    document.title = "Wildfire- Profile"
     // const [edit, setEdit] = useState(false);
 
     return (

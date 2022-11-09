@@ -4,6 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const AddService = () => {
     const [service, setService] = useState({ rating: [] });
+    document.title = "Wildfire- Add Service"
     // console.log(service)
 
     const notifyToast = () => {

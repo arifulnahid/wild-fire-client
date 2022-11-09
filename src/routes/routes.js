@@ -12,6 +12,7 @@ import AddService from "../layouts/Service/AddService";
 import Service from "../layouts/Service/Service";
 import ServiceDetails from "../layouts/Service/ServiceDetails";
 import PrivateRoute from "./PrivateRoute";
+import Review from "../layouts/Reviews/Review";
 
 export const router = createBrowserRouter([
     {

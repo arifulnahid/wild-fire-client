@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Blog = () => {
+    document.title = "Wildfire- Blog"
     return (
         <div className="grid grid-cols-1 gap-7 lg:mx-20 lg:my-5">
             <div className='mx-auto text-start'>

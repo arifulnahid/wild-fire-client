@@ -10,6 +10,7 @@ const SignUp = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+    document.title = "Wildfire- Sign Up"
     // console.log("state:", user);
 
     const handelGoogleSignIn = () => {

@@ -5,7 +5,7 @@ import { AuthContex } from '../../contexts/AuthProvider';
 const Reviews = ({ rating, id }) => {
     const { user } = useContext(AuthContex);
     const [update, setUpdate] = useState();
-    console.log(user.uid, rating);
+    // console.log(user.uid, rating);
 
     let totalRating = 0;
     rating.forEach(element => {
