@@ -1,11 +1,9 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
-import ServiceItem from './ServiceItem';
 import { Card } from 'flowbite-react';
+import ServiceItem from '../../layouts/Service/ServiceItem';
 
 const Service = () => {
-    const service = useLoaderData();
-    // console.log(service);
+    const service = [];
 
     return (
         <div>

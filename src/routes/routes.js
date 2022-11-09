@@ -22,7 +22,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home></Home>,
+                loader: () => fetch("http://localhost:5000/service?limit=3")
             },
             {
                 path: '/login',
@@ -48,7 +49,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/service',
-                element: <Service></Service>
+                element: <Service></Service>,
+                loader: () => fetch("http://localhost:5000/service")
             },
             {
                 path: "/add-service",
