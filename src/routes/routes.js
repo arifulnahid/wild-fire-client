@@ -9,6 +9,7 @@ import EditProfile from "../layouts/Profile/EditProfile";
 import Profile from "../layouts/Profile/Profile";
 import AddService from "../layouts/Service/AddService";
 import Service from "../layouts/Service/Service";
+import ServiceDetails from "../layouts/Service/ServiceDetails";
 import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -55,6 +56,11 @@ export const router = createBrowserRouter([
             {
                 path: "/add-service",
                 element: <PrivateRoute><AddService></AddService></PrivateRoute>
+            },
+            {
+                path: "/service/:id",
+                element: <ServiceDetails></ServiceDetails>,
+                loader: ({ params }) => fetch(`http://localhost:5000/service/${params.id}`)
             }
         ]
     }

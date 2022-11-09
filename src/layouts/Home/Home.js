@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import Banner from '../../components/Banner/Banner';
+import Pakage from '../../components/Pakage/Pakage';
+import Testimonial from '../../components/Testimonial/Testimonial';
 import ServiceItem from '../Service/ServiceItem';
 const Home = () => {
     const service = useLoaderData()
@@ -17,6 +19,8 @@ const Home = () => {
                     </div>
                     <Link to="/service" className="w-44 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Explore More</Link>
                 </div>
+                <Pakage></Pakage>
+                <Testimonial></Testimonial>
             </div>
         </div >
     );

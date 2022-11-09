@@ -76,7 +76,7 @@ const SignUp = () => {
                             id="name"
                             type="text"
                             placeholder="Mr, Jhon"
-                            required={false}
+                            required={true}
                         />
                     </div>
                     <div>
@@ -91,7 +91,7 @@ const SignUp = () => {
                             id="photo"
                             type="url"
                             placeholder="Photo url"
-                            required={false}
+                            required={true}
                         />
                     </div>
                     <div>
