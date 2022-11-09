@@ -101,7 +101,27 @@ const Navabr = () => {
                 </NavLink>
                 {
                     user ?
-                        <button onClick={UserLogout}>Logout</button>
+                        <>
+                            <NavLink
+                                className="block py-2 pr-4 pl-3 md:p-0 bg-blue-700 text-white dark:text-white md:bg-transparent md:text-blue-700"
+                                to='/add-service'
+                                style={({ isActive }) =>
+                                    isActive ? { color: "red" } : undefined
+                                }
+                            >
+                                Add Service
+                            </NavLink>
+                            <NavLink
+                                className="block py-2 pr-4 pl-3 md:p-0 bg-blue-700 text-white dark:text-white md:bg-transparent md:text-blue-700"
+                                to='/reviews'
+                                style={({ isActive }) =>
+                                    isActive ? { color: "red" } : undefined
+                                }
+                            >
+                                My Reviews
+                            </NavLink>
+                            <button onClick={UserLogout}>Logout</button>
+                        </>
                         :
                         <NavLink
                             className="block py-2 pr-4 pl-3 md:p-0 bg-blue-700 text-white dark:text-white md:bg-transparent md:text-blue-700"
