@@ -20,10 +20,10 @@ const FooterComponent = () => {
                             <Footer.Title title="about" />
                             <Footer.LinkGroup col={true}>
                                 <Footer.Link href="#">
-                                    Flowbite
+                                    Service
                                 </Footer.Link>
                                 <Footer.Link href="#">
-                                    Tailwind CSS
+                                    Package
                                 </Footer.Link>
                             </Footer.LinkGroup>
                         </div>

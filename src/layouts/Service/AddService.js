@@ -1,9 +1,14 @@
 import { Label, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddService = () => {
     const [service, setService] = useState({ rating: [] });
     // console.log(service)
+
+    const notifyToast = () => {
+        return toast.success("Service Added Succesfully!");
+    }
 
     const handleInput = event => {
         event.preventDefault();
@@ -28,6 +33,7 @@ const AddService = () => {
         }).then(res => res.json())
             .then(data => {
                 event.target.reset();
+                notifyToast();
                 console.log(data)
             })
             .catch(e => console.error(e));
@@ -36,6 +42,7 @@ const AddService = () => {
 
     return (
         <div className='w-96 mx-auto my-5'>
+            <Toaster />
             <h1 className='text-xl font-bold mb-5'>Add Service</h1>
             <form onSubmit={handleAddService}>
                 <div className="flex flex-col gap-4 text-start mb-5">

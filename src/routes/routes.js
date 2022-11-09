@@ -5,6 +5,7 @@ import SignUp from "../layouts/Accounts/SignUp";
 import Blog from "../layouts/Blog/Blog";
 import Home from "../layouts/Home/Home";
 import Main from "../layouts/Main/Main";
+import MyReviews from "../layouts/Reviews/MyReviews";
 import EditProfile from "../layouts/Profile/EditProfile";
 import Profile from "../layouts/Profile/Profile";
 import AddService from "../layouts/Service/AddService";
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
                 path: "/service/:id",
                 element: <ServiceDetails></ServiceDetails>,
                 loader: ({ params }) => fetch(`http://localhost:5000/service/${params.id}`)
+            },
+            {
+                path: "/reviews",
+                element: <PrivateRoute><MyReviews></MyReviews></PrivateRoute>
             }
         ]
     }

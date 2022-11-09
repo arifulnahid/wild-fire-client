@@ -12,7 +12,7 @@ const ServiceItem = ({ service }) => {
                 <div className="w-full bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
                         <PhotoView src={image}>
-                            <img className="rounded-t-lg" src={image} alt={title} />
+                            <img className="rounded-t-lg h-72 w-full" src={image} alt={title} />
                         </PhotoView>
                     </a>
                     <div className="px-5 pb-5">

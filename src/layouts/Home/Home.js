@@ -12,7 +12,7 @@ const Home = () => {
         <div>
             <div className='lg:mx-24 lg:my-14 my-5 '>
                 <Banner></Banner>
-                <div>
+                <div className='my-10 lg:my-24'>
                     <h1 className='my-5 text-3xl font-bold text-red-600'>Explore Our Service</h1>
                     <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-5 mx-auto my-5 lg:px-5 md:px-5'>
                         {service.map(item => <ServiceItem key={item._id} service={item}></ServiceItem>)}

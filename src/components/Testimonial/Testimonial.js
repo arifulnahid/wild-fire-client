@@ -3,7 +3,7 @@ import React from 'react';
 
 const Testimonial = () => {
     return (
-        <div className='my-10'>
+        <div className='my-10 lg:my-14'>
             <h1 className='my-5 text-3xl font-bold text-red-600'>Photo Gallery</h1>
             <div className="grid h-96 grid-cols-1 lg:grid-cols-2 gap-4 sm:h-64 xl:h-80 2xl:h-96">
                 <Carousel indicators={false}>
