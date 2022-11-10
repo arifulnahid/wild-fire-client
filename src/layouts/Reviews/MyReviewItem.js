@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BsTrash, BsPencilSquare } from "react-icons/bs";
 
-const MyReviewItem = ({ rating }) => {
-    const { serviceId } = rating
+
+const MyReviewItem = ({ rating, handelDeleteReview }) => {
+    const { serviceId, _id } = rating
     const [service, setService] = useState();
     // console.log("service", service)
-
 
     useEffect(() => {
         fetch(`http://localhost:5000/service/${serviceId}`)
@@ -18,14 +19,21 @@ const MyReviewItem = ({ rating }) => {
 
     return (
         <div className="text-start">
+
             <div className="w-full bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <Link to={`/service/${serviceId}`}>
                     <img className="w-full h-60 rounded-t-lg" src={service?.image} alt={service?.title} />
                 </Link>
                 <div className="px-5 pb-5">
-                    <a href="#">
-                        <h5 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">{service?.title}</h5>
-                    </a>
+                    <div className='flex items-center justify-between my-2'>
+                        <Link to={`/service/${serviceId}`}>
+                            <h5 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">{service?.title}</h5>
+                        </Link>
+                        <div className=''>
+                            <button className='text-xl mx-2'><BsPencilSquare /></button>
+                            <button onClick={() => handelDeleteReview(_id)} className='text-xl'><BsTrash /></button>
+                        </div>
+                    </div>
                     <div className="flex items-center mt-2.5 mb-5">
                         {rating.review}
                     </div>
