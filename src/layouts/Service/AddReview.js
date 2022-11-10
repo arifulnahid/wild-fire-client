@@ -1,13 +1,16 @@
 import React from 'react';
 
 const AddReview = ({ submitReview }) => {
+
     const handleReview = event => {
         event.preventDefault();
         const form = event.target;
         const rating = form.rating.value;
         const review = form.review.value;
         submitReview(rating, review)
+        form.reset()
     }
+
     return (
         <>
             <form onSubmit={handleReview} className='px-2'>
