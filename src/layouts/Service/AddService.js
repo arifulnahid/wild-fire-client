@@ -25,7 +25,7 @@ const AddService = () => {
     const handleAddService = event => {
         event.preventDefault();
         const rating = []
-        fetch("http://localhost:5000/service-add", {
+        fetch("https://wild-fire-server.vercel.app/service-add", {
             method: "POST",
             headers: {
                 "content-type": "application/json"

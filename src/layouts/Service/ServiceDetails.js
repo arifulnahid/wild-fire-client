@@ -37,7 +37,7 @@ const ServiceDetails = () => {
         const date = new Date();
         const rat = { rating, review, displayName, photoURL, uid, date, serviceId }
 
-        fetch(`http://localhost:5000/review`, {
+        fetch(`https://wild-fire-server.vercel.app/review`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -58,7 +58,7 @@ const ServiceDetails = () => {
     const handelDeleteReview = (id) => {
         const confirm = window.confirm("Do You Want To Delete");
         if (confirm) {
-            fetch(`http://localhost:5000/review/${id}`, {
+            fetch(`https://wild-fire-server.vercel.app/review/${id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())
@@ -75,7 +75,7 @@ const ServiceDetails = () => {
         const date = new Date();
         const editData = { rating: ratingInput, review, date }
 
-        fetch(`http://localhost:5000/review/${id}`, {
+        fetch(`https://wild-fire-server.vercel.app/review/${id}`, {
             method: "PATCH",
             headers: {
                 'content-type': 'application/json'
@@ -91,7 +91,7 @@ const ServiceDetails = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/review/${_id}`)
+        fetch(`https://wild-fire-server.vercel.app/review/${_id}`)
             .then(res => res.json())
             .then(data => {
                 setRatingData(data);

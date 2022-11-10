@@ -9,7 +9,7 @@ const MyReviewItem = ({ rating, handelDeleteReview }) => {
     // console.log("service", service)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/service/${serviceId}`)
+        fetch(`https://wild-fire-server.vercel.app/service/${serviceId}`)
             .then(res => res.json())
             .then(data => {
                 setService(data)
@@ -29,8 +29,8 @@ const MyReviewItem = ({ rating, handelDeleteReview }) => {
                         <Link to={`/service/${serviceId}`}>
                             <h5 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">{service?.title}</h5>
                         </Link>
-                        <div className=''>
-                            <button className='text-xl mx-2'><BsPencilSquare /></button>
+                        <div className='flex'>
+                            <Link to={`/service/${serviceId}`} className='text-xl mx-2'><BsPencilSquare /></Link>
                             <button onClick={() => handelDeleteReview(_id)} className='text-xl'><BsTrash /></button>
                         </div>
                     </div>

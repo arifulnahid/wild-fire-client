@@ -18,7 +18,7 @@ const MyReviews = () => {
     const handelDeleteReview = (id) => {
         const confirm = window.confirm("Do You Want To Delete");
         if (confirm) {
-            fetch(`http://localhost:5000/review/${id}`, {
+            fetch(`https://wild-fire-server.vercel.app/review/${id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())
@@ -34,7 +34,7 @@ const MyReviews = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myreview/${user.uid}`)
+        fetch(`https://wild-fire-server.vercel.app/myreview/${user.uid}`)
             .then(res => res.json())
             .then(data => {
                 setRating(data);

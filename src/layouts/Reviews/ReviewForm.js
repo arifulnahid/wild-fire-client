@@ -22,7 +22,7 @@ const ReviewForm = ({ user, id }) => {
         const serviceId = id;
         setRatingData({ rating, review, displayName, photoURL, uid, date, serviceId })
 
-        fetch(`http://localhost:5000/review`, {
+        fetch(`https://wild-fire-server.vercel.app/review`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch("http://localhost:5000/service?limit=3")
+                loader: () => fetch("https://wild-fire-server.vercel.app/service?limit=3")
             },
             {
                 path: '/login',
@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
             {
                 path: '/service',
                 element: <Service></Service>,
-                loader: () => fetch("http://localhost:5000/service")
+                loader: () => fetch("https://wild-fire-server.vercel.app/service")
             },
             {
                 path: "/add-service",
@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
             {
                 path: "/service/:id",
                 element: <ServiceDetails></ServiceDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/service/${params.id}`)
+                loader: ({ params }) => fetch(`https://wild-fire-server.vercel.app/service/${params.id}`)
             },
             {
                 path: "/reviews",
