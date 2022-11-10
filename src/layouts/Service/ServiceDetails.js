@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import dateFormat from "dateformat";
 import toast, { Toaster } from 'react-hot-toast';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, Navigate, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContex } from '../../contexts/AuthProvider';
 import ReviewList from '../Reviews/ReviewList';
 import AddReview from './AddReview';
@@ -13,6 +13,7 @@ const ServiceDetails = () => {
     const { user } = useContext(AuthContex);
     const [ratingData, setRatingData] = useState([]);
     document.title = "Service Details";
+    const navigate = useNavigate();
     const avgRat = AvgRat(ratingData)
     const nowDate = new Date();
     // console.log("Rating: ", ratingData);
@@ -56,18 +57,22 @@ const ServiceDetails = () => {
     }
 
     const handelDeleteReview = (id) => {
-        const confirm = window.confirm("Do You Want To Delete");
-        if (confirm) {
-            fetch(`https://wild-fire-server.vercel.app/review/${id}`, {
-                method: "DELETE"
-            })
-                .then(res => res.json())
-                .then(data => {
-                    const remaining = ratingData.filter(rat => rat._id !== id)
-                    setRatingData(remaining);
-                    toastNotify("d")
-                    // console.log(data);
-                }).catch(e => console.error(e))
+        if (user?.uid) {
+            const confirm = window.confirm("Do You Want To Delete");
+            if (confirm) {
+                fetch(`https://wild-fire-server.vercel.app/review/${id}`, {
+                    method: "DELETE"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        const remaining = ratingData.filter(rat => rat._id !== id)
+                        setRatingData(remaining);
+                        toastNotify("d")
+                        // console.log(data);
+                    }).catch(e => console.error(e))
+            }
+        } else {
+            navigate("/login")
         }
     }
 
@@ -75,19 +80,23 @@ const ServiceDetails = () => {
         const date = new Date();
         const editData = { rating: ratingInput, review, date }
 
-        fetch(`https://wild-fire-server.vercel.app/review/${id}`, {
-            method: "PATCH",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(editData)
-        })
-            .then(res => res.json())
-            .then(data => {
-                const remaining = ratingData.filter(rat => rat._id !== id)
-                setRatingData([...remaining, { ...rating, ...editData }])
-                console.log(data);
-            }).catch(e => console.error(e))
+        if (user?.uid) {
+            fetch(`https://wild-fire-server.vercel.app/review/${id}`, {
+                method: "PATCH",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(editData)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const remaining = ratingData.filter(rat => rat._id !== id)
+                    setRatingData([...remaining, { ...rating, ...editData }])
+                    console.log(data);
+                }).catch(e => console.error(e))
+        } else {
+            navigate("/login")
+        }
     }
 
     useEffect(() => {
