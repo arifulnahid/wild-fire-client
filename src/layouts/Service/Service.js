@@ -5,6 +5,7 @@ import { Card } from 'flowbite-react';
 
 const Service = () => {
     const service = useLoaderData();
+    document.title = "Wildfire- Service"
     // console.log(service);
 
     return (
