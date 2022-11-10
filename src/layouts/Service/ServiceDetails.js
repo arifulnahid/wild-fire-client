@@ -12,7 +12,6 @@ const ServiceDetails = () => {
     const { _id, title, image, description, price } = useLoaderData()
     const { user } = useContext(AuthContex);
     const [ratingData, setRatingData] = useState([]);
-    const [update, setUpdate] = useState([]);
     document.title = "Service Details";
     const avgRat = AvgRat(ratingData)
     const nowDate = new Date();
@@ -72,6 +71,25 @@ const ServiceDetails = () => {
         }
     }
 
+    const submitEditReview = (ratingInput, review, rating, id) => {
+        const date = new Date();
+        const editData = { rating: ratingInput, review, date }
+
+        fetch(`http://localhost:5000/review/${id}`, {
+            method: "PATCH",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(editData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                const remaining = ratingData.filter(rat => rat._id !== id)
+                setRatingData([...remaining, { ...rating, ...editData }])
+                console.log(data);
+            }).catch(e => console.error(e))
+    }
+
     useEffect(() => {
         fetch(`http://localhost:5000/review/${_id}`)
             .then(res => res.json())
@@ -117,6 +135,7 @@ const ServiceDetails = () => {
                         key={i}
                         rating={item}
                         handelDeleteReview={handelDeleteReview}
+                        submitEditReview={submitEditReview}
                     />)
                 }
             </div>

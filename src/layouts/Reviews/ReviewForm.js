@@ -3,6 +3,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const ReviewForm = ({ user, id }) => {
     const [ratingData, setRatingData] = useState({});
+    console.log(ratingData);
     // console.log(ratingData);
 
     const toastNotify = () => {
@@ -21,7 +22,7 @@ const ReviewForm = ({ user, id }) => {
         const serviceId = id;
         setRatingData({ rating, review, displayName, photoURL, uid, date, serviceId })
 
-        fetch(`http://localhost:5000/review/${id}`, {
+        fetch(`http://localhost:5000/review`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -34,6 +35,7 @@ const ReviewForm = ({ user, id }) => {
                 toastNotify();
             }).catch(e => console.error(e))
     }
+
 
     return (
         <>
