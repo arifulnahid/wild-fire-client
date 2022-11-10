@@ -6,15 +6,15 @@
 ## Live Server
 (https://wild-fire-server.vercel.app)
 
-### Website Feature 
-** Email Password Base Login 
-** Social Login
-** Profile Update
-** Booking service 
-** Review Service
+### Website Feature
+1) Email Password Base Login 
+2) Social Login
+3) Profile Update
+4) Booking service 
+5) Review Service
 
 ## Usese Technology
-** React Router Dom
-** Tailwindcss
-** Firebase Hosting
+1) React Router Dom
+2) Tailwindcss
+3) Firebase Hosting
 
