@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import dateFormat from "dateformat";
 import toast, { Toaster } from 'react-hot-toast';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContex } from '../../contexts/AuthProvider';
 import ReviewList from '../Reviews/ReviewList';
 import AddReview from './AddReview';
@@ -34,7 +34,7 @@ const ServiceDetails = () => {
         const photoURL = user.photoURL;
         const uid = user.uid;
         const serviceId = _id;
-        const date = new Date();
+        const date = Date.now();
         const rat = { rating, review, displayName, photoURL, uid, date, serviceId }
 
         fetch(`https://wild-fire-server.vercel.app/review`, {
@@ -49,7 +49,7 @@ const ServiceDetails = () => {
                 const id = data.insertedId;
                 rat._id = id;
                 // console.log(data);
-                setRatingData([...ratingData, rat])
+                setRatingData([rat, ...ratingData])
                 // setUpdate([...ratingData, rat]);
                 toastNotify("a");
             }).catch(e => console.error(e))
@@ -95,7 +95,7 @@ const ServiceDetails = () => {
             .then(res => res.json())
             .then(data => {
                 setRatingData(data);
-                // console.log(data)
+                console.log(data)
             }).catch(e => console.error(e))
     }, [])
 
@@ -121,9 +121,12 @@ const ServiceDetails = () => {
                     <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
                     <a href="#" className="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white">{ratingData.length} reviews</a>
                 </div>
-                <AddReview
-                    submitReview={submitReview}
-                />
+                {
+                    user?.uid ?
+                        <AddReview
+                            submitReview={submitReview}
+                        /> : <Link to="/login" className='mb-5 block rounded py-2 px-14 bg-slate-500 text-white text-xl font-bold text-center'>Add a review</Link>
+                }
                 {
                     !ratingData.length ?
                         <div className='text-semibold text-xl text-center my-14'>No Reviews</div> :
