@@ -12,12 +12,14 @@ const ServiceDetails = () => {
     const { _id, title, image, description, price } = useLoaderData()
     const { user } = useContext(AuthContex);
     const [ratingData, setRatingData] = useState([]);
-    const [submitData, setSubmitData] = useState({})
+    const [update, setUpdate] = useState([]);
     document.title = "Service Details";
     const avgRat = AvgRat(ratingData)
     const nowDate = new Date();
-    // console.log("Rating: ", rating);
+    // console.log("Rating: ", ratingData);
     // console.log("submit data: ", submitData);
+    // console.log("update", update);
+    // console.log("render");
 
 
     const toastNotify = (meta) => {
@@ -45,8 +47,11 @@ const ServiceDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                const id = data.insertedId;
+                rat._id = id;
+                // console.log(data);
                 setRatingData([...ratingData, rat])
+                // setUpdate([...ratingData, rat]);
                 toastNotify("a");
             }).catch(e => console.error(e))
     }
