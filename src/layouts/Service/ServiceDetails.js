@@ -11,12 +11,14 @@ import { AvgRat } from '../../utilitis/AvgRating';
 const ServiceDetails = () => {
     const { _id, title, image, description, price } = useLoaderData()
     const { user } = useContext(AuthContex);
-    const [rating, setRating] = useState([]);
-    const [avgRat, setAvgRat] = useState("");
+    const [ratingData, setRatingData] = useState([]);
+    const [submitData, setSubmitData] = useState({})
     document.title = "Service Details";
-    // console.log(rating);
+    const avgRat = AvgRat(ratingData)
+    const nowDate = new Date();
+    // console.log("Rating: ", rating);
+    // console.log("submit data: ", submitData);
 
-    // console.log(avgRat);
 
     const toastNotify = (meta) => {
         if (meta == "a") {
@@ -44,7 +46,7 @@ const ServiceDetails = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                setRating([rat])
+                setRatingData([...ratingData, rat])
                 toastNotify("a");
             }).catch(e => console.error(e))
     }
@@ -57,10 +59,10 @@ const ServiceDetails = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    const remaining = rating.filter(rat => rat._id !== id)
-                    setRating(remaining);
+                    const remaining = ratingData.filter(rat => rat._id !== id)
+                    setRatingData(remaining);
                     toastNotify("d")
-                    console.log(data);
+                    // console.log(data);
                 }).catch(e => console.error(e))
         }
     }
@@ -69,11 +71,10 @@ const ServiceDetails = () => {
         fetch(`http://localhost:5000/review/${_id}`)
             .then(res => res.json())
             .then(data => {
-                setRating(data);
-                setAvgRat(AvgRat(rating))
+                setRatingData(data);
                 // console.log(data)
             }).catch(e => console.error(e))
-    }, [rating])
+    }, [])
 
 
     return (
@@ -95,19 +96,19 @@ const ServiceDetails = () => {
                     <svg aria-hidden="true" className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                     <p className="ml-2 text-sm font-bold text-gray-900 dark:text-white">{avgRat}</p>
                     <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                    <a href="#" className="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white">{rating.length} reviews</a>
+                    <a href="#" className="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white">{ratingData.length} reviews</a>
                 </div>
                 <AddReview
                     submitReview={submitReview}
                 />
                 {
-                    !rating.length ?
+                    !ratingData.length ?
                         <div className='text-semibold text-xl text-center my-14'>No Reviews</div> :
                         <></>
                 }
 
                 {
-                    rating.map((item, i) => <ReviewList
+                    ratingData.map((item, i) => <ReviewList
                         key={i}
                         rating={item}
                         handelDeleteReview={handelDeleteReview}

@@ -1,6 +1,6 @@
 import React from 'react';
 import dateFormat from "dateformat";
-import { BsTrash, BsMenuApp } from "react-icons/bs";
+import { BsTrash, BsPencilSquare } from "react-icons/bs";
 
 const ReviewList = ({ rating, handelDeleteReview }) => {
     // console.log(rating);
@@ -8,7 +8,7 @@ const ReviewList = ({ rating, handelDeleteReview }) => {
 
     return (
         <>
-            <div className='w-full mx-2'>
+            <div className='mx-5'>
                 <div className='my-3'>
                     <div className='flex items-start justify-between'>
                         <div className="flex items-center">
@@ -23,8 +23,9 @@ const ReviewList = ({ rating, handelDeleteReview }) => {
                                 <p>{date}</p>
                             </div>
                         </div>
-                        <div>
-                            <button onClick={() => handelDeleteReview(rating._id)}><BsTrash /></button>
+                        <div className='flex'>
+                            <button className='mx-3 text-xl'><BsPencilSquare /></button>
+                            <button className='text-xl' onClick={() => handelDeleteReview(rating._id)}><BsTrash /></button>
                         </div>
                     </div>
                     <div className='ml-3 mt-3'>{rating?.review}</div>
